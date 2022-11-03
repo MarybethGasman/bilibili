@@ -8,7 +8,7 @@ onUnmounted(() => {
 })
 
 const { data: result } = await(await fetch(
-  `http://124.223.112.154:8000/?url=http://api.bilibili.com/x/web-interface/index/top/rcmd?fresh_type=0&version=1&ps=10&fresh_idx=0&fresh_idx_1h=0&homepage_ver=1`
+  `https://124.223.112.154:1443/?url=http://api.bilibili.com/x/web-interface/index/top/rcmd?fresh_type=0&version=1&ps=10&fresh_idx=0&fresh_idx_1h=0&homepage_ver=1`
   , {
     headers: {
       "Host": "api.bilibili.com",
@@ -19,31 +19,31 @@ const { data: result } = await(await fetch(
   })).json()
 let videoList = result.item
 
-const { data: locsResult } = await(await fetch(`http://124.223.112.154:8000/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=4694`)).json()
+const { data: locsResult } = await(await fetch(`https://124.223.112.154:1443/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=4694`)).json()
 let banners = locsResult['4694']
 // console.log(banners)
 
 //推广
-const { data: promoteResult } = await(await fetch(`http://124.223.112.154:8000/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=34`)).json()
+const { data: promoteResult } = await(await fetch(`https://124.223.112.154:1443/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=34`)).json()
 let promoteList = promoteResult['34']
 
 // 赛事
-const { data: gameResult } = await(await fetch(`http://124.223.112.154:8000/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=3449`)).json()
+const { data: gameResult } = await(await fetch(`https://124.223.112.154:1443/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=3449`)).json()
 let gameList = gameResult['3449']
 // console.log(gameList)
 
 // 直播
-const { data: liveResult } = await(await fetch(`http://124.223.112.154:8000/?url=https://api.live.bilibili.com/xlive/web-interface/v1/webMain/getMoreRecList?platform=web`)).json()
+const { data: liveResult } = await(await fetch(`https://124.223.112.154:1443/?url=https://api.live.bilibili.com/xlive/web-interface/v1/webMain/getMoreRecList?platform=web`)).json()
 let liveList = liveResult['recommend_room_list']
 
 // 动画
-const { data: cartoonResult } = await(await fetch(`http://124.223.112.154:8000/?url=https://api.bilibili.com/x/web-interface/dynamic/region?ps=12&pn=1&rid=1`)).json()
+const { data: cartoonResult } = await(await fetch(`https://124.223.112.154:1443/?url=https://api.bilibili.com/x/web-interface/dynamic/region?ps=12&pn=1&rid=1`)).json()
 // console.log(cartoonResult)
 let cartoonList = cartoonResult['archives']
 // console.log(cartoonList)
 
 // 番剧
-const { result: bangumiResult } = await(await fetch(`http://124.223.112.154:8000/?url=https://api.bilibili.com/pgc/web/timeline/v2?day_before=2&day_after=4&season_type=1`)).json()
+const { result: bangumiResult } = await(await fetch(`https://124.223.112.154:1443/?url=https://api.bilibili.com/pgc/web/timeline/v2?day_before=2&day_after=4&season_type=1`)).json()
 // console.log(bangumiResult)
 let bangumiList = bangumiResult['latest']
 // console.log(bangumiList)
