@@ -1,0 +1,20 @@
+*.log
+nuxt.d.ts
+
+# private config
+.env
+
+# deps
+node_modules
+
+# build or generate
+.nuxt
+dist
+.output
+
+# IDE
+.idea
+.vercel
+
+# tailwindcss empty config file for autocompletion
+tailwind.config.js
