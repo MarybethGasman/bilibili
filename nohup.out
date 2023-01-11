@@ -1,0 +1,12 @@
+
+> preview
+> nuxt preview
+
+Nuxi 3.0.0
+ℹ Node.js version: 16.19.0
+ℹ Preset: node-server
+ℹ Working dir: .output
+ℹ Loading .env. This will not be loaded when running the server in production.
+ℹ Starting preview command: node ./server/index.mjs
+
+Listening http://[::]:3000

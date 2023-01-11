@@ -5,7 +5,6 @@ interface Video {
 </script>
 
 <script lang="ts" setup>
-import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { number } from '@intlify/core-base';
 export type IStyles = 'primary' | 'success' | 'warning' | 'danger'
 
