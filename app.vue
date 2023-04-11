@@ -13,3 +13,15 @@
 <script lang="ts" setup>
 
 </script>
+
+<style lang="css">
+.keep-all {
+  word-break: keep-all;
+}
+
+.scroll-bar-hidden {}
+
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

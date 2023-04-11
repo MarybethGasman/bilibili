@@ -7,63 +7,75 @@ onUnmounted(() => {
   // window.removeEventListener("scroll", handleScroll)
 })
 let baseURI = `http://124.223.112.154:8000`
-const [res1, res2, res3, res4, res5, res6, res7] = await Promise.all([
-  fetch(
-  `${baseURI}/?url=http://api.bilibili.com/x/web-interface/index/top/rcmd?fresh_type=0&version=1&ps=10&fresh_idx=0&fresh_idx_1h=0&homepage_ver=1`
-  , {
-    headers: {
-      "Host": "api.bilibili.com",
-      "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
-      "accept": "application/json, text/plain, */*",
-      "Cookie": "_uuid = 7106174D6-1B6A-C7EC-AFF1-AE43789D3C21043699infoc; b_nut=1646897245; buvid3=04E17740-530D-C942-7190-E3A80849C9B744667infoc; buvid4=DEE1B5FB-B10A-1335-4479-EDF1D7F8B34A44667-022031015-T9iDfD7tRvv9ojwSFeGNjw%3D%3D;blackside_state=1;rpdid=|(m~)lmYml|0J'uYR~u~uJ~k;LIVE_BUVID=AUTO2816502951472877;nostalgia_conf=-1;CURRENT_BLACKGAP=0;i-wanna-go-back=-1;b_ut=7;buvid_fp_plain=undefined;CURRENT_QUALITY=32;fingerprint=a3cb784f1ecefff0561bd1266b7ccdf1;buvid_fp=a3cb784f1ecefff0561bd1266b7ccdf1;i-wanna-go-feeds=-1;sid=66nr3sk9;innersign=0;CURRENT_FNVAL=16;PVID=2;bsource=search_google;b_lsid=FCEB4866_1840E550366",
-    }
-  }),
-  fetch(`${baseURI}/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=4694`),
-  //推广
-  fetch(`${baseURI}/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=34`),
+const [{data: res1}, {data: res2}, {data: res3}, {data: res4}, {data: res5}, {data: res6}, {data: res7}] = await Promise.all([
+  useFetch(() => '/api/banners'),
+  useFetch(() => '/api/locs', {params: {ids: 4694}}),
+  useFetch(() => '/api/locs', {params: {ids: 34}}),
+  useFetch(() => '/api/locs', {params: {ids: 3449}}),
+  useFetch(() => '/api/rooms', {params: {ids: 3449}}),
+  useFetch(() => '/api/cartoons', {params: {ids: 3449}}),
+  useFetch(() => '/api/bangumi', {params: {ids: 3449}}),
+
+])
+// const { data } = await useFetch(() => `/api/hello/${count.value}`, { params: { token: 123 } })
+
+// const [res1, res2, res3, res4, res5, res6, res7] = await Promise.all([
+//   fetch(
+//   `${baseURI}/?url=http://api.bilibili.com/x/web-interface/index/top/rcmd?fresh_type=0&version=1&ps=10&fresh_idx=0&fresh_idx_1h=0&homepage_ver=1`
+//   , {
+//     headers: {
+//       "Host": "api.bilibili.com",
+//       "user-agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
+//       "accept": "application/json, text/plain, */*",
+//       "Cookie": "_uuid = 7106174D6-1B6A-C7EC-AFF1-AE43789D3C21043699infoc; b_nut=1646897245; buvid3=04E17740-530D-C942-7190-E3A80849C9B744667infoc; buvid4=DEE1B5FB-B10A-1335-4479-EDF1D7F8B34A44667-022031015-T9iDfD7tRvv9ojwSFeGNjw%3D%3D;blackside_state=1;rpdid=|(m~)lmYml|0J'uYR~u~uJ~k;LIVE_BUVID=AUTO2816502951472877;nostalgia_conf=-1;CURRENT_BLACKGAP=0;i-wanna-go-back=-1;b_ut=7;buvid_fp_plain=undefined;CURRENT_QUALITY=32;fingerprint=a3cb784f1ecefff0561bd1266b7ccdf1;buvid_fp=a3cb784f1ecefff0561bd1266b7ccdf1;i-wanna-go-feeds=-1;sid=66nr3sk9;innersign=0;CURRENT_FNVAL=16;PVID=2;bsource=search_google;b_lsid=FCEB4866_1840E550366",
+//     }
+//   }),
+//   fetch(`${baseURI}/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=4694`),
+//   //推广
+//   fetch(`${baseURI}/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=34`),
   
-  //赛事
-  fetch(`${baseURI}/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=3449`),
+//   //赛事
+//   fetch(`${baseURI}/?url=http://api.bilibili.com/x/web-show/res/locs?pf=0&ids=3449`),
 
-  //直播
-  fetch(`${baseURI}/?url=https://api.live.bilibili.com/xlive/web-interface/v1/webMain/getMoreRecList?platform=web`),
+//   //直播
+//   fetch(`${baseURI}/?url=https://api.live.bilibili.com/xlive/web-interface/v1/webMain/getMoreRecList?platform=web`),
 
-  //动画
-  fetch(`${baseURI}/?url=https://api.bilibili.com/x/web-interface/dynamic/region?ps=12&pn=1&rid=1`),
+//   //动画
+//   fetch(`${baseURI}/?url=https://api.bilibili.com/x/web-interface/dynamic/region?ps=12&pn=1&rid=1`),
 
-  //番剧
-  fetch(`${baseURI}/?url=https://api.bilibili.com/pgc/web/timeline/v2?day_before=2&day_after=4&season_type=1`),
-]
-)
+//   //番剧
+//   fetch(`${baseURI}/?url=https://api.bilibili.com/pgc/web/timeline/v2?day_before=2&day_after=4&season_type=1`),
+// ]
+// )
 // console.log(obj)
-const { data: result } = await(res1).json()
+const { data: result } = (res1.value)
 let videoList = result.item
 
-const { data: locsResult } = await(res2).json()
-let banners = locsResult['4694']
+// const { data: locsResult } = (res2.value)
+let banners = res2.value
 // console.log(banners)
 
 //推广
-const { data: promoteResult } = await(res3).json()
-let promoteList = promoteResult['34']
+// const { data: promoteResult } = (res3.value)
+let promoteList = res3.value
 
 // 赛事
-const { data: gameResult } = await(res4).json()
-let gameList = gameResult['3449']
+// const { data: gameResult } = (res4.value)
+let gameList = res4.value
 // console.log(gameList)
 
 // 直播
-const { data: liveResult } = await(res5).json()
+const { data: liveResult } = (res5.value)
 let liveList = liveResult['recommend_room_list']
 
 // 动画
-const { data: cartoonResult } = await(res6).json()
+const { data: cartoonResult } = (res6.value)
 // console.log(cartoonResult)
 let cartoonList = cartoonResult['archives']
 // console.log(cartoonList)
 
 // 番剧
-const { result: bangumiResult } = await(res7).json()
+const { result: bangumiResult } = (res7.value)
 // console.log(bangumiResult)
 let bangumiList = bangumiResult['latest']
 // console.log(bangumiList)
@@ -94,8 +106,8 @@ const handleScroll = async (e: Event) => {
   <div class="bg-white">
     <div>
       <div class="mt-3 absolute z-10 w-full">
-        <ul class="flex justify-between items-center text-sm">
-          <li class="text-white px-2 flex">
+        <ul class="flex justify-between items-center text-sm keep-all">
+          <li class="text-white flex">
             <a class="flex" href="">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="zhuzhan-icon">
@@ -108,42 +120,21 @@ const handleScroll = async (e: Event) => {
               </span>
             </a>
           </li>
-          <li class="text-white px-2 flex"><a href="">番剧</a></li>
-          <li class="text-white px-2 flex"><a href="">直播</a></li>
-          <li class="text-white px-2 flex"><a href="">游戏中心</a></li>
-          <li class="text-white px-2 flex"><a href="">会员购</a></li>
-          <li class="text-white px-2 flex"><a href="">S12</a></li>
-          <li class="text-white px-2 flex"><a href="">下载客户端</a></li>
-          <li class="text-white px-2 flex">
-            <form class="flex relative w-80 pl-1 pr-12 rounded-lg bg-[#f1f2f3] hover:bg-white items-center h-10"
-              style="border-radius:8px 8px 8px 8px;">
-              <div class="p-1 w-full h-8 flex focus:bg-[#e3e5e7] items-center justify-between">
-                <input class="text-[#61666d] bg-transparent outline-none" type="text" autocomplete="off" accesskey="s"
-                  maxlength="100" x-webkit-speech="" x-webkit-grammar="builtin:translate" value=""
-                  placeholder="这AD有点烫嘴！" title="这AD有点烫嘴！">
-                <!-- <div class="nav-search-clean">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M8 14.75C11.7279 14.75 14.75 11.7279 14.75 8C14.75 4.27208 11.7279 1.25 8 1.25C4.27208 1.25 1.25 4.27208 1.25 8C1.25 11.7279 4.27208 14.75 8 14.75ZM9.64999 5.64303C9.84525 5.44777 10.1618 5.44777 10.3571 5.64303C10.5524 5.83829 10.5524 6.15487 10.3571 6.35014L8.70718 8.00005L10.3571 9.64997C10.5524 9.84523 10.5524 10.1618 10.3571 10.3571C10.1618 10.5523 9.84525 10.5523 9.64999 10.3571L8.00007 8.70716L6.35016 10.3571C6.15489 10.5523 5.83831 10.5523 5.64305 10.3571C5.44779 10.1618 5.44779 9.84523 5.64305 9.64997L7.29296 8.00005L5.64305 6.35014C5.44779 6.15487 5.44779 5.83829 5.64305 5.64303C5.83831 5.44777 6.15489 5.44777 6.35016 5.64303L8.00007 7.29294L9.64999 5.64303Z"
-                      fill="#C9CCD0"></path>
-                  </svg>
-                </div> -->
-              </div>
-              <div class="absolute right-3 text-black">
-                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M16.3451 15.2003C16.6377 15.4915 16.4752 15.772 16.1934 16.0632C16.15 16.1279 16.0958 16.1818 16.0525 16.2249C15.7707 16.473 15.4456 16.624 15.1854 16.3652L11.6848 12.8815C10.4709 13.8198 8.97529 14.3267 7.44714 14.3267C3.62134 14.3267 0.5 11.2314 0.5 7.41337C0.5 3.60616 3.6105 0.5 7.44714 0.5C11.2729 0.5 14.3943 3.59538 14.3943 7.41337C14.3943 8.98802 13.8524 10.5087 12.8661 11.7383L16.3451 15.2003ZM2.13647 7.4026C2.13647 10.3146 4.52083 12.6766 7.43624 12.6766C10.3517 12.6766 12.736 10.3146 12.736 7.4026C12.736 4.49058 10.3517 2.1286 7.43624 2.1286C4.50999 2.1286 2.13647 4.50136 2.13647 7.4026Z"
-                    fill="currentColor"></path>
-                </svg>
-              </div>
-            </form>
+          <li class="text-white flex"><a href="">番剧</a></li>
+          <li class="text-white flex"><a href="">直播</a></li>
+          <li class="text-white flex"><a href="">游戏中心</a></li>
+          <li class="text-white flex"><a href="">会员购</a></li>
+          <li class="text-white flex"><a href="">S12</a></li>
+          <li class="text-white flex"><a href="">下载客户端</a></li>
+          <li class="text-white flex">
+            <SearchBox/>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <div class="w-9 h-9 bg-[#00AEEC] rounded-full flex items-center justify-center">
               <a href="">登录</a>
             </div>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="flex flex-col items-center" href="">
               <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="right-entry-icon">
@@ -160,7 +151,7 @@ const handleScroll = async (e: Event) => {
               <span>大会员</span>
             </a>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="flex flex-col items-center" href="">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="right-entry-icon">
@@ -174,7 +165,7 @@ const handleScroll = async (e: Event) => {
               <span>消息</span>
             </a>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="flex flex-col items-center" href="">
               <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="right-entry-icon">
@@ -201,7 +192,7 @@ const handleScroll = async (e: Event) => {
               <span>动态</span>
             </a>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="flex flex-col items-center" href="">
               <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="right-entry-icon">
@@ -215,7 +206,7 @@ const handleScroll = async (e: Event) => {
               <span>收藏</span>
             </a>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="flex flex-col items-center" href="">
               <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="right-entry-icon">
@@ -228,7 +219,7 @@ const handleScroll = async (e: Event) => {
               <span>历史</span>
             </a>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="flex flex-col items-center" href="">
               <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="right-entry-icon">
@@ -249,7 +240,7 @@ const handleScroll = async (e: Event) => {
 
             </a>
           </li>
-          <li class="text-white px-2 flex">
+          <li class="text-white flex">
             <a class="" href="">
               <div class="flex px-5 py-2 bg-[#FB7299] rounded-lg items-center">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"

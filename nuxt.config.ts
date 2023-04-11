@@ -4,14 +4,14 @@ export default defineNuxtConfig({
   // app
   app: {
     head: {
-      title: 'Nuxt 3 Awesome Starter',
-      titleTemplate: '%s - Nuxt 3 Awesome Starter',
+      title: '哔哩哔哩 (゜-゜)つロ 干杯~-bilibili',
+      titleTemplate: '%s - 哔哩哔哩 (゜-゜)つロ 干杯~-bilibili',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {
           hid: 'description',
           name: 'description',
-          content: 'Nuxt 3 Awesome Starter',
+          content: '哔哩哔哩（bilibili.com)是国内知名的视频弹幕网站，这里有及时的动漫新番，活跃的ACG氛围，有创意的Up主。大家可以在这里找到许多欢乐。',
         },
         { name: "referrer", content: "no-referrer" },
       ],
@@ -30,11 +30,17 @@ export default defineNuxtConfig({
   build: {
   },
 
-  target: 'static',
+  image: {
+    // Options
+  },
+  
+
+  // target: 'static',
 
   // modules
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/image-edge',
   ],
 
   // experimental features
@@ -45,5 +51,17 @@ export default defineNuxtConfig({
   // auto import components
   components: true,
 
+  nitro: {
+    devProxy: {
+      '/proxy/api': {
+        target: 'https://api.bilibili.com',
+        changeOrigin: true,
+      },
+      '/proxy/search': {
+        target: 'https://s.search.bilibili.com',
+        changeOrigin: true,
+      },
+    }
+  }
 
 })

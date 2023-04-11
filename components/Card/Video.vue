@@ -5,7 +5,6 @@ interface Video {
 </script>
 
 <script lang="ts" setup>
-import { number } from '@intlify/core-base';
 export type IStyles = 'primary' | 'success' | 'warning' | 'danger'
 
 // props
@@ -89,7 +88,8 @@ const isDestroyed = ref<Boolean>(false)
 <template>
   <div>
     <a class="video" :href="playURI">
-      <img class="" :src="coverURI" :alt="title">
+    <!--  <nuxt-img class="" format="webp"  :src="coverURI" loading="lazy" alt="" /> -->
+      <img class="hidden" onload="this.classList.remove('hidden')" :src="coverURI" :alt="title">
       <div class="video__status relative">
         <div
           class="video__status--details bg-gradient-to-b from-transparent to-black px-4 absolute bottom-0 flex justify-between w-full text-white">
@@ -108,3 +108,11 @@ const isDestroyed = ref<Boolean>(false)
     </a>
   </div>
 </template>
+
+
+<style lang="css" scoped>
+.hidden {
+  visibility: hidden;
+}
+
+</style>
